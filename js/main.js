@@ -2,7 +2,6 @@ function chooseNumber(from, to) {
   const number = from + Math.random() * (to + 1 - from);
   return Math.floor(number);
 }
-
 // имя_функции(проверяемая_строка, максимальная_длина);
 // Результат: true, если строка проходит по длине, и false — если не проходит
 
@@ -17,11 +16,6 @@ function verifyStrokeLength(stroke, maxLength) {
 verifyStrokeLength('some text', 10);
 
 // массивы
-
-const PHOTO_ID = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
-
-const URL_NUMBER = chooseNumber(1, 25);
-const URL_ADDRESS = `photos/${  URL_NUMBER  }.jpg`;
 
 const DESCRIPTION = [
   'на каникулах1',
@@ -51,14 +45,8 @@ const DESCRIPTION = [
   'на даче у бабули5',
 ];
 
-const LIKES = chooseNumber(15, 200);
-
-const getRandomArrayElement = (elements) => elements[_.random(0, elements.length - 1)];
+const getRandomArrayElement = (elements) => elements[chooseNumber(0, elements.length - 1)];
 // comments start
-const COMMENT_ID = chooseNumber(1, 10000);
-
-const URL_AVATAR = chooseNumber(1, 6);
-const AVATAR = `img/avatar${  URL_AVATAR  }.svg`;
 
 const MESSAGE = [
   'Всё отлично!',
@@ -80,27 +68,37 @@ const NAME = [
   'Вашингтон',
 ];
 const createComment = () => ({
-  id: COMMENT_ID,
-  avatar: AVATAR,
+  commentId: chooseNumber(1, 10000),
+  avatar: `img/avatar${chooseNumber(1, 6)}.svg`,
   message: getRandomArrayElement(MESSAGE),
   name: getRandomArrayElement(NAME),
 });
-const COMMENTS = Array.from({
-  length: 50,
-}, createComment);
+const COMMENTS = Array.from(
+  {
+    length: 50,
+  },
+  createComment,
+);
 
 // comments end
 
-const createCard = () => ({
-  photo: getRandomArrayElement(PHOTO_ID),
-  url: getRandomArrayElement(URL_ADDRESS),
-  description: getRandomArrayElement(DESCRIPTION),
-  likes: LIKES,
+const createCard = (index) => ({
+  photo: index,
+  url: `photos/${index}.jpg`,
+  description: DESCRIPTION[index],
+  likes: chooseNumber(15, 200),
   comments: getRandomArrayElement(COMMENTS),
 });
 
-const CARD = Array.from({
-  length: 25,
-}, createCard);
+// const CARD = Array.from(
+//   {
+//     length: 25,
+//   },
+//   createCard,
+// );
 
-CARD;
+const commentArray = [];
+
+for (let index = 0; index < 25; index++) {
+  commentArray.push(createCard(index));
+}

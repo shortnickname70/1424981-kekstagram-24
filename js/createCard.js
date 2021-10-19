@@ -1,4 +1,4 @@
-import {chooseNumber} from './chooseNumber-function';
+import {chooseNumber} from './chooseNumber-function.js';
 
 // массивы
 
@@ -67,13 +67,17 @@ const COMMENTS = Array.from(
 
 // comments end
 
-const createCard = (index) => ({
-  photo: index,
-  url: `photos/${index}.jpg`,
-  description: DESCRIPTION[index],
-  likes: chooseNumber(15, 200),
-  comments: getRandomArrayElement(COMMENTS),
-});
+let card = [];
+// eslint-disable-next-line arrow-body-style
+const createCard = (index) => {
+  return {
+    photo: index,
+    url: `photos/${index}.jpg`,
+    description: DESCRIPTION[index],
+    likes: chooseNumber(15, 200),
+    comments: getRandomArrayElement(COMMENTS),
+  };
+};
 
 // const CARD = Array.from(
 //   {
@@ -87,3 +91,8 @@ const commentArray = [];
 for (let index = 0; index < 25; index++) {
   commentArray.push(createCard(index));
 }
+
+card = createCard();
+
+export {createCard};
+export {card};

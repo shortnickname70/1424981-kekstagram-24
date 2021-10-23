@@ -15,6 +15,19 @@ const
 
 
 uploadNewFile.addEventListener('change', () => {
-  uploadPopup.classList.remove('.hidden');
-  body.classList.add('.modal-open');
+  uploadPopup.classList.remove('hidden');
+  body.classList.add('modal-open');
 });
+
+uploadPopupClose.addEventListener('click', () => {
+  uploadPopup.classList.add('hidden');
+  body.classList.remove('modal-open');
+
+});
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.keyCode === 27) {
+    uploadPopup.classList.add('hidden');
+  }
+});
+

@@ -54,7 +54,7 @@ const USER_NAME = [
 ];
 const createComment = () => ({
   commentId: chooseNumber(1, 10000),
-  avatar: `img/avatar${chooseNumber(1, 6)}.svg`,
+  avatar: `img/avatar-${chooseNumber(1, 6)}.svg`,
   message: getRandomArrayElement(MESSAGE),
   userName: getRandomArrayElement(USER_NAME),
 });
@@ -95,4 +95,5 @@ for (let index = 0; index < 25; index++) {
 card = createCard();
 
 export {createCard};
+export {createComment};
 export {card};

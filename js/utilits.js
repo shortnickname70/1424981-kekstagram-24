@@ -12,24 +12,8 @@ function verifyStrokeLength(stroke, maxLength) {
 verifyStrokeLength('some text', 10);
 
 
-const ESC_KEYCODE = 27;
-const ENTER_KEYCODE = 13;
-
-// проверяет нажатие клавиши энтер
-
-const isEnterEvent = function (evt, action) {
-  if (evt.keyCode === ENTER_KEYCODE) {
-    action(evt);
-  }
-};
-
 // проверяет нажатие клавиши эскейп
 
-const isEscEvent = function (evt, action) {
-  if (evt.keyCode === ESC_KEYCODE) {
-    action(evt);
-  }
-};
+const isEscEvent = (evt) => evt.key === 'Escape';
 
-export {isEnterEvent};
 export {isEscEvent};

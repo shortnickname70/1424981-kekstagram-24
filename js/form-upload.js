@@ -31,3 +31,4 @@ document.addEventListener('keydown', (evt) => {
   }
 });
 
+export{uploadPopup};

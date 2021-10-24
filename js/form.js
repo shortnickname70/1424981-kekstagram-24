@@ -1,11 +1,13 @@
+import {uploadPopup} from  './form-upload.js';
 //валидация хэштегов
 const appHashtag = document.querySelector('.text__hashtags');
 const MIN_NAME_LENGTH = 2;
 const MAX_NAME_LENGTH = 20;
 
 appHashtag.addEventListener('input', () => {
+
   const valueLength = appHashtag.value.length;
-  const testHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+  const testHashtag = RegExp('/^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/','g');
   if (valueLength < MIN_NAME_LENGTH) {
     appHashtag.setCustomValidity(`Введите еще ${  MIN_NAME_LENGTH - valueLength } симв.`);
   } else if (valueLength > MAX_NAME_LENGTH) {
@@ -13,12 +15,19 @@ appHashtag.addEventListener('input', () => {
   } else {
     appHashtag.setCustomValidity('');
   }
-  if (appHashtag.value.match(testHashtag)) {
+  let asd = appHashtag.value.matchAll(testHashtag);
+  console.log(asd);
+  if (appHashtag.value.matchAll(testHashtag) && appHashtag.value > 1) {
     appHashtag.setCustomValidity('Введите корректные символы');
-  }
-  else {
+  } else {
     appHashtag.setCustomValidity('');
   }
+  const appHashtagArray = appHashtag.value.split();
+  const isThereDuplicat = [...new Set(appHashtagArray)];
+  if (isThereDuplicat.length < appHashtagArray.length) {
+    appHashtag.setCustomValidity('Дубликаты хэштегов не допускаются');
+  }
+
   appHashtag.reportValidity();
 });
 
@@ -38,4 +47,9 @@ appComment.addEventListener('input', () => {
   }
 
   appComment.reportValidity();
+});
+
+//в фокусе не должен закрываться при esc
+appHashtag.addEventListener('focus', (evt) => {
+  document.removeEventListener('keydown', evt);
 });

@@ -1,55 +1,54 @@
 import {
-  createComment
-} from './createCard.js';
+  chooseNumber
+} from './chooseNumber-function.js';
 import {
-  createCard
+  CardsArray
 } from './createCard.js';
 import {
   card
 } from './createCard.js';
 
 const bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
 
-const userBigPictureArray = [];
-for (let index = 0; index < 25; index++) {
-  userBigPictureArray.push(createCard(index));
-}
-
-userBigPictureArray.forEach(({
-  url,
-  likes,
-  comments
-}) => {
-
-  bigPicture.querySelector('.big-picture__img').setAttribute('src', url);
-  bigPicture.querySelector('.likes-count').textContent = likes;
-  bigPicture.querySelector('.comments-count').textContent = comments.length;
-  //вставляем комментарии начало
+const appendComments = (comments) => {
   const commentList = document.querySelector('.social__comments'); //куда вставляем новый коммент
   const commentTemplate = document.querySelector('.social__comment'); //шаблон коммента
 
-  const someComment = createComment(); // вставляемый новый коммент
+  // вставляемый новый коммент
   const someCommentFragment = document.createDocumentFragment();
 
-  const commentItem = commentTemplate.cloneNode(true);
-  commentItem.querySelector('.social__picture').setAttribute('src', comments.avatar);
-  commentItem.querySelector('.social__picture').setAttribute('alt', comments.userName);
-  commentItem.querySelector('.social__text').textContent = comments.message;
-  someCommentFragment.appendChild(commentItem);
+  comments.forEach(({
+    avatar,
+    userName,
+    message
+  }) => {
+    const commentItem = commentTemplate.cloneNode(true);
+    commentItem.querySelector('.social__picture').setAttribute('src', avatar);
+    commentItem.querySelector('.social__picture').setAttribute('alt', userName);
+    commentItem.querySelector('.social__text').textContent = message;
+    someCommentFragment.appendChild(commentItem);
+  });
 
-  // someComment.forEach(({avatar, userName, message}) => {
-  //   const commentItem = commentTemplate.cloneNode(true);
-  //   commentItem.querySelector('.social__picture').src.textContent = avatar;
-  //   commentItem.querySelector('.picture__likes').alt.textContent = userName;
-  //   commentItem.querySelector('.social__text').textContent = message;
-  //   someCommentFragment.appendChild(commentItem);
-  // });
   commentList.appendChild(someCommentFragment);
-  //вставляем комментарии конец
+};
 
-  bigPicture.querySelector('.social__caption').textContent = card.description;
+function renderBigPicture(clickedPicture) {
 
+  bigPicture.querySelector('.big-picture__image').setAttribute('src', clickedPicture.url);
+  bigPicture.querySelector('.likes-count').textContent = clickedPicture.likes;
+  bigPicture.querySelector('.comments-count').textContent = clickedPicture.comments.length;
+  appendComments(clickedPicture.comments);
+  bigPicture.querySelector('.social__caption').textContent = clickedPicture.description;
+}
+
+const allPicuteresCollection = document.querySelectorAll('.picture');
+allPicuteresCollection.forEach((item) => {
+  item.addEventListener('click', (evt) => {
+    bigPicture.classList.remove('hidden');
+    const clickedElement = CardsArray.filter((filterItem) => filterItem.url === evt.target.getAttribute('src'));
+    console.log(clickedElement[0], 'clickedElement');
+    renderBigPicture(clickedElement[0]);
+  });
 });
 
 // скрываем счётчик комментариев .social__comment-count и загрузки новых комментариев .comments-loader

@@ -15,7 +15,7 @@ appHashtag.addEventListener('input', () => {
   } else {
     appHashtag.setCustomValidity('');
   }
-  let asd = appHashtag.value.matchAll(testHashtag);
+  const asd = appHashtag.value.matchAll(testHashtag);
   console.log(asd);
   if (appHashtag.value.matchAll(testHashtag) && appHashtag.value > 1) {
     appHashtag.setCustomValidity('Введите корректные символы');
@@ -51,5 +51,6 @@ appComment.addEventListener('input', () => {
 
 //в фокусе не должен закрываться при esc
 appHashtag.addEventListener('focus', (evt) => {
+  evt.stopPropagation()
   document.removeEventListener('keydown', evt);
 });

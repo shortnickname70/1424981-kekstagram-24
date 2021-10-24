@@ -1,4 +1,6 @@
-import {chooseNumber} from './chooseNumber-function.js';
+import {
+  chooseNumber
+} from './chooseNumber-function.js';
 
 // массивы
 
@@ -58,12 +60,15 @@ const createComment = () => ({
   message: getRandomArrayElement(MESSAGE),
   userName: getRandomArrayElement(USER_NAME),
 });
-const COMMENTS = Array.from(
-  {
-    length: 50,
+
+function CreateCommentList(length) {
+  return Array.from({
+    length: length,
   },
   createComment,
-);
+  );
+
+}
 
 // comments end
 
@@ -72,28 +77,34 @@ let card = [];
 const createCard = (index) => {
   return {
     photo: index,
-    url: `photos/${index}.jpg`,
+    url: `photos/${index+1}.jpg`,
     description: DESCRIPTION[index],
     likes: chooseNumber(15, 200),
-    comments: getRandomArrayElement(COMMENTS),
+    comments: CreateCommentList(chooseNumber(1, 30)),
   };
 };
 
-// const CARD = Array.from(
-//   {
-//     length: 25,
-//   },
-//   createCard,
-// );
+// const commentArray = [];
 
-const commentArray = [];
+// for (let index = 0; index < 25; index++) {
+//   commentArray.push(createCard(index));
+// }
 
+const CardsArray = [];
 for (let index = 0; index < 25; index++) {
-  commentArray.push(createCard(index));
+  CardsArray.push(createCard(index));
 }
+card = createCard(chooseNumber(1, 24));
 
-card = createCard();
-
-export {createCard};
-export {createComment};
-export {card};
+export {
+  createCard
+};
+export {
+  createComment
+};
+export {
+  card
+};
+export {
+  CardsArray
+};

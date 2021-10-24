@@ -1,5 +1,4 @@
-import {createCard} from './createCard.js';
-
+import {CardsArray} from './createCard.js';
 
 const pictureTemplate = document.querySelector('#picture').content
   .querySelector('.picture');
@@ -8,13 +7,8 @@ const userPicturesList = document.querySelector('.pictures');
 
 // const similarUserPictures = createCard();
 const similarUserFragment = document.createDocumentFragment();
-const userPictureArray = [];
 
-for (let index = 0; index < 25; index++) {
-  userPictureArray.push(createCard(index));
-}
-
-userPictureArray.forEach(({url, likes, comments}) => {
+CardsArray.forEach(({url, likes, comments}) => {
 
   const pictureBlock = pictureTemplate.cloneNode(true);
   pictureBlock.querySelector('.picture__img').setAttribute('src', url);

@@ -1,6 +1,3 @@
-import {
-  isEscEvent
-} from './utilits.js';
 
 const
   body = document.querySelector('body'),

@@ -1,12 +1,9 @@
 import {
-  chooseNumber
-} from './chooseNumber-function.js';
-import {
   CardsArray
-} from './createCard.js';
-import {
-  card
-} from './createCard.js';
+} from './create-card.js';
+// import {
+//   card
+// } from './create-card.js';
 
 const bigPicture = document.querySelector('.big-picture');
 
@@ -20,7 +17,7 @@ const appendComments = (comments) => {
   comments.forEach(({
     avatar,
     userName,
-    message
+    message,
   }) => {
     const commentItem = commentTemplate.cloneNode(true);
     commentItem.querySelector('.social__picture').setAttribute('src', avatar);
@@ -46,7 +43,6 @@ allPicuteresCollection.forEach((item) => {
   item.addEventListener('click', (evt) => {
     bigPicture.classList.remove('hidden');
     const clickedElement = CardsArray.filter((filterItem) => filterItem.url === evt.target.getAttribute('src'));
-    console.log(clickedElement[0], 'clickedElement');
     renderBigPicture(clickedElement[0]);
   });
 });
@@ -92,3 +88,5 @@ document.addEventListener('keydown', (evt) => {
     bigPicture.classList.add('hidden');
   }
 });
+
+//

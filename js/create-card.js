@@ -1,6 +1,6 @@
 import {
   chooseNumber
-} from './chooseNumber-function.js';
+} from './data.js';
 
 // массивы
 
@@ -32,7 +32,7 @@ const DESCRIPTION = [
   'на даче у бабули5',
 ];
 
-const getRandomArrayElement = (elements) => elements[chooseNumber(0, elements.length - 1)];
+
 // comments start
 
 const MESSAGE = [

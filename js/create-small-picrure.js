@@ -1,4 +1,4 @@
-import {CardsArray} from './createCard.js';
+import {CardsArray} from './create-card.js';
 
 const pictureTemplate = document.querySelector('#picture').content
   .querySelector('.picture');

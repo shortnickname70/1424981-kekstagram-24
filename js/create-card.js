@@ -1,4 +1,6 @@
-import {chooseNumber} from './chooseNumber-function.js';
+import {
+  chooseNumber
+} from './data.js';
 
 // массивы
 
@@ -30,7 +32,7 @@ const DESCRIPTION = [
   'на даче у бабули5',
 ];
 
-const getRandomArrayElement = (elements) => elements[chooseNumber(0, elements.length - 1)];
+
 // comments start
 
 const MESSAGE = [
@@ -42,7 +44,7 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент ? !',
 ];
 
-const NAME = [
+const USER_NAME = [
   'Иван',
   'Хуан Себастьян',
   'Мария',
@@ -54,16 +56,19 @@ const NAME = [
 ];
 const createComment = () => ({
   commentId: chooseNumber(1, 10000),
-  avatar: `img/avatar${chooseNumber(1, 6)}.svg`,
+  avatar: `img/avatar-${chooseNumber(1, 6)}.svg`,
   message: getRandomArrayElement(MESSAGE),
-  name: getRandomArrayElement(NAME),
+  userName: getRandomArrayElement(USER_NAME),
 });
-const COMMENTS = Array.from(
-  {
-    length: 50,
+
+function CreateCommentList(length) {
+  return Array.from({
+    length: length,
   },
   createComment,
-);
+  );
+
+}
 
 // comments end
 
@@ -72,27 +77,34 @@ let card = [];
 const createCard = (index) => {
   return {
     photo: index,
-    url: `photos/${index}.jpg`,
+    url: `photos/${index+1}.jpg`,
     description: DESCRIPTION[index],
     likes: chooseNumber(15, 200),
-    comments: getRandomArrayElement(COMMENTS),
+    comments: CreateCommentList(chooseNumber(1, 30)),
   };
 };
 
-// const CARD = Array.from(
-//   {
-//     length: 25,
-//   },
-//   createCard,
-// );
+// const commentArray = [];
 
-const commentArray = [];
+// for (let index = 0; index < 25; index++) {
+//   commentArray.push(createCard(index));
+// }
 
+const CardsArray = [];
 for (let index = 0; index < 25; index++) {
-  commentArray.push(createCard(index));
+  CardsArray.push(createCard(index));
 }
+card = createCard(chooseNumber(1, 24));
 
-card = createCard();
-
-export {createCard};
-export {card};
+export {
+  createCard
+};
+export {
+  createComment
+};
+export {
+  card
+};
+export {
+  CardsArray
+};

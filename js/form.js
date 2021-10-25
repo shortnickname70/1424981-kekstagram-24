@@ -1,7 +1,10 @@
-import {
-  uploadPopup
-} from './form-upload.js';
+// import {
+//   uploadPopup
+// } from './form-upload.js';
+
 //   const testHashtag = RegExp('/^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/', 'g');
+
+// валидация хэштегов
 
 (() => {
 
@@ -12,8 +15,8 @@ import {
   };
 
 
-  const addHashtag = document.querySelector('.text__hashtags'),
-    uploadSubmitElement = document.querySelector('.img-upload__submit');
+  const addHashtag = document.querySelector('.text__hashtags');
+
 
   const checkRepeatHashtags = (hashtags) => {
     for (let i = 0; i < hashtags.length; i++) {
@@ -47,7 +50,7 @@ import {
       } else if (hashtags.length > HASHTAG.maxHashtags) {
         errorMessage = 'Максимальное количество  хэштегов не более 5';
       } else if (hashtagItem.length > HASHTAG.maxLength) {
-        errorMessage = 'Максимальная длина одного хэш-тега 20 символов, включая решётку';
+        errorMessage = 'Максимальная длина одного хэштега 20 символов, включая решётку';
       } else if (checkRepeatHashtags(hashtags)) {
         errorMessage = 'Хэштеги не должны повторяться';
       }
@@ -58,43 +61,10 @@ import {
 
   addHashtag.addEventListener('input', hashtagValidity);
 
-  const highlightInvalidField = (field) => {
-    if (!field.validity.valid) {
-      field.style.outline = '2px solid red';
-    } else {
-      field.style.outline = 'none';
-    }
-  };
-
-  uploadSubmitElement.addEventListener('click', () => {
-    highlightInvalidField(addHashtag);
-  });
-
-  uploadSubmitElement.addEventListener('submit', () => {
-    highlightInvalidField(addHashtag);
-  });
-
 })();
 
 
 // //валидация комментов
-// const appHashtag = document.querySelector('.text__hashtags');
-// const addComment = document.querySelector('.social__footer-text');
-// const MIN_COMMENT_LENGTH = 1;
-// const MAX_COMMENT_LENGTH = 140;
-
-// addComment.addEventListener('input', () => {
-//   const valueCommentLength = addComment.value.length;
-//   if (valueCommentLength < MIN_COMMENT_LENGTH) {
-//     addComment.setCustomValidity(`Введите еще ${  MIN_COMMENT_LENGTH - valueCommentLength } симв.`);
-//   } else if (valueCommentLength > MAX_COMMENT_LENGTH) {
-//     addComment.setCustomValidity(`Удалите лишние ${  valueCommentLength - MAX_COMMENT_LENGTH } симв.`);
-//   } else {
-//     addComment.setCustomValidity('');
-//   }
-
-//   addComment.reportValidity();
-// });
 
 (() => {
 
@@ -102,8 +72,8 @@ import {
     maxCommentLength: 140,
   };
 
-  const addComment = document.querySelector('.text__description'),
-    uploadSubmitElement = document.querySelector('.img-upload__submit');
+  const addComment = document.querySelector('.text__description');
+
 
   const commentValidity = () => {
     addComment.style.outline = '';
@@ -125,22 +95,6 @@ import {
   };
 
   addComment.addEventListener('input', commentValidity);
-
-  const commentInvalidField = (field) => {
-    if (!field.validity.valid) {
-      field.style.outline = '2px solid red';
-    } else {
-      field.style.outline = 'none';
-    }
-  };
-
-  uploadSubmitElement.addEventListener('click', () => {
-    commentInvalidField(addComment);
-  });
-
-  uploadSubmitElement.addEventListener('submit', () => {
-    commentInvalidField(addComment);
-  });
 
 })();
 

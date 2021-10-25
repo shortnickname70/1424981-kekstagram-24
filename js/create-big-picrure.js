@@ -1,9 +1,6 @@
 import {
   CardsArray
 } from './create-card.js';
-// import {
-//   card
-// } from './create-card.js';
 
 const bigPicture = document.querySelector('.big-picture');
 

@@ -21,23 +21,10 @@ uploadPopupClose.addEventListener('click', () => {
 
 });
 
-// если фокус в поле ввода хэштега, то нажатие на Esc не приводит к закрытию формы
+// если фокус в поле ввода хэштега или комментария, то нажатие на Esc не приводит к закрытию формы
 
 document.addEventListener('keydown', (evt) => {
-  if (hashtag === document.activeElement) {
-    return evt;
-  } else {
-    if (evt.keyCode === 27) {
-      uploadPopup.classList.add('hidden');
-    }
-  }
-  document.removeEventListener('keydown', (evt));
-});
-
-// если фокус в поле ввода комментария, то нажатие на Esc не приводит к закрытию формы
-
-document.addEventListener('keydown', (evt) => {
-  if (descriptionImage === document.activeElement) {
+  if (descriptionImage || hashtag === document.activeElement) {
     return evt;
   } else {
     if (evt.keyCode === 27) {

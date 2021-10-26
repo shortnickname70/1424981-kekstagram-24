@@ -1,4 +1,3 @@
-
 const
   body = document.querySelector('body'),
   uploadSection = document.querySelector('.img-upload'),
@@ -22,10 +21,33 @@ uploadPopupClose.addEventListener('click', () => {
 
 });
 
+// если фокус в поле ввода хэштега, то нажатие на Esc не приводит к закрытию формы
+
 document.addEventListener('keydown', (evt) => {
-  if (evt.keyCode === 27) {
-    uploadPopup.classList.add('hidden');
+  if (hashtag === document.activeElement) {
+    return evt;
+  } else {
+    if (evt.keyCode === 27) {
+      uploadPopup.classList.add('hidden');
+    }
   }
+  document.removeEventListener('keydown', (evt));
 });
 
-export{uploadPopup};
+// если фокус в поле ввода комментария, то нажатие на Esc не приводит к закрытию формы
+
+document.addEventListener('keydown', (evt) => {
+  if (descriptionImage === document.activeElement) {
+    return evt;
+  } else {
+    if (evt.keyCode === 27) {
+      uploadPopup.classList.add('hidden');
+    }
+  }
+  document.removeEventListener('keydown', (evt));
+});
+
+
+export {
+  uploadPopup
+};

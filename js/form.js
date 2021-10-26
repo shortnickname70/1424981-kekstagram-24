@@ -1,10 +1,11 @@
-// import {
-//   uploadPopup
-// } from './form-upload.js';
-
-//   const testHashtag = RegExp('/^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/', 'g');
-
+//https://coderoad.ru/46155/%D0%9A%D0%B0%D0%BA-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D1%82%D1%8C-%D0%B0%D0%B4%D1%80%D0%B5%D1%81-email-%D0%B2-JavaScript
 // валидация хэштегов
+// const testHashtag = RegExp('/^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/', 'g');
+import {
+  uploadPopup
+} from './form-upload.js';
+
+const addHashtag = document.querySelector('.text__hashtags');
 
 (() => {
 
@@ -13,9 +14,6 @@
     hashtagSymbol: '#',
     maxLength: 20,
   };
-
-
-  const addHashtag = document.querySelector('.text__hashtags');
 
 
   const checkRepeatHashtags = (hashtags) => {
@@ -29,6 +27,9 @@
     }
     return false;
   };
+
+
+  // const testRegex = (hashtags) =>  testHashtag.test(hashtags);
 
   const hashtagValidity = () => {
     addHashtag.style.outline = '';
@@ -54,6 +55,15 @@
       } else if (checkRepeatHashtags(hashtags)) {
         errorMessage = 'Хэштеги не должны повторяться';
       }
+      const toTestRegexHashtag = addHashtag.value;
+      const testHashtag = RegExp('/^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/', 'g');
+      if (!testHashtag.test(toTestRegexHashtag)) {
+        errorMessage = 'Введите корректные символы';
+        return false;
+      }
+      // else if (testRegex(hashtags)) {
+      //   errorMessage = 'Введите корректные символы';
+      // }
     });
 
     addHashtag.setCustomValidity(errorMessage);
@@ -98,28 +108,3 @@
 
 })();
 
-//в фокусе не должен закрываться при esc
-
-// const toRemoveWindow = function (focusInHashtagField) {
-//   if (focusInHashtagField === true) {
-//     document.removeEventListener('keydown', (evt) => {
-//       if (evt.keyCode === 27) {
-//         uploadPopup.classList.add('hidden');
-//       }
-//     });
-//   } else {
-//     document.addEventListener('keydown', (evt) => {
-//       if (evt.keyCode === 27) {
-//         uploadPopup.classList.add('hidden');
-//       }
-//     });
-
-//   }
-// };
-// appHashtag.addEventListener('focus', () => {
-//   toRemoveWindow(true);
-// });
-
-// appHashtag.addEventListener('blur', () => {
-//   toRemoveWindow(false);
-// });

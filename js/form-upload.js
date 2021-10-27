@@ -1,7 +1,3 @@
-import {
-  isEscEvent
-} from './utilits.js';
-
 const
   body = document.querySelector('body'),
   uploadSection = document.querySelector('.img-upload'),
@@ -25,10 +21,20 @@ uploadPopupClose.addEventListener('click', () => {
 
 });
 
+// если фокус в поле ввода хэштега или комментария, то нажатие на Esc не приводит к закрытию формы
+
 document.addEventListener('keydown', (evt) => {
-  if (evt.keyCode === 27) {
-    uploadPopup.classList.add('hidden');
+  if (descriptionImage || hashtag === document.activeElement) {
+    return evt;
+  } else {
+    if (evt.keyCode === 27) {
+      uploadPopup.classList.add('hidden');
+    }
   }
+  document.removeEventListener('keydown', (evt));
 });
 
-export{uploadPopup};
+
+export {
+  uploadPopup
+};

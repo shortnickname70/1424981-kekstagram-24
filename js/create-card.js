@@ -2,6 +2,10 @@ import {
   chooseNumber
 } from './data.js';
 
+import {
+  getRandomArrayElement
+} from './data.js';
+
 // массивы
 
 const DESCRIPTION = [

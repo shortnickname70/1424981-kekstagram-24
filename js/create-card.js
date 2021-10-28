@@ -84,7 +84,7 @@ const createCard = (index) => {
     url: `photos/${index+1}.jpg`,
     description: DESCRIPTION[index],
     likes: chooseNumber(15, 200),
-    comments: CreateCommentList(chooseNumber(1, 30)),
+    comments: CreateCommentList(chooseNumber(1, 12)),
   };
 };
 

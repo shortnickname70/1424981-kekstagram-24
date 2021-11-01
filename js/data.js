@@ -10,7 +10,6 @@ function verifyStrokeLength(stroke, maxLength) {
 }
 verifyStrokeLength('some text', 10);
 
-
 // проверяет нажатие клавиши эскейп
 
 const isEscEvent = (evt) => evt.key === 'Escape';
@@ -26,7 +25,22 @@ function chooseNumber(from, to) {
 
 const getRandomArrayElement = (elements) => elements[chooseNumber(0, elements.length - 1)];
 
+//клавиши и левая кнопка мыши
+const ESC_BUTTON = 27;
+const MOUSE_LEFT_BUTTON = 0;
 
-export {isEscEvent};
-export {getRandomArrayElement};
-export {chooseNumber};
+export {
+  isEscEvent
+};
+export {
+  getRandomArrayElement
+};
+export {
+  chooseNumber
+};
+export {
+  ESC_BUTTON
+};
+export {
+  MOUSE_LEFT_BUTTON
+};

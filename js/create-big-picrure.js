@@ -12,6 +12,7 @@ const commentCountStart = 5;
 const bigPicture = document.querySelector('.big-picture');
 const commentList = document.querySelector('.social__comments'); //куда вставляем новый коммент
 const commentCounter = document.querySelectorAll('.social__comment-count');
+const commentLoader = document.querySelector('.comments-loader');
 
 const appendComments = (comments) => {
   const commentItem = document.querySelector('.social__comment'); //шаблон коммента
@@ -43,15 +44,18 @@ function renderBigPicture(clickedPicture) {
   bigPicture.querySelector('.comments-count').textContent = clickedPicture.comments.length + 2;
   appendComments(clickedPicture.comments);
   bigPicture.querySelector('.social__caption').textContent = clickedPicture.description;
-  if (clickedPicture.comments.length < commentCountStart) {
-    commentCounter.textContent = `${clickedPicture.comments.length  }из${ clickedPicture.comments.length  }комментариев`;
+  if (clickedPicture.comments.length + 2 <= 5) {
+    commentCounter.textContent = `${clickedPicture.comments.length +2 }из${ clickedPicture.comments.length +2 }комментари`;
+    commentLoader.classList.add('hidden');
   }
+  // if (clickedPicture.comments.length + 2 % 5) {
+  //   commentLoader.classList.add('hidden');
+  // }
 }
 
 
 // вставляем по 5 комментов
 let commentInc = 9;
-const commentLoader = document.querySelector('.comments-loader');
 
 function renderComment() {
   const commentsArray = document.querySelectorAll('.social__comment');
@@ -60,17 +64,19 @@ function renderComment() {
       commentsArray[i].classList.remove('hidden');
     } else {
       commentLoader.removeEventListener('click', renderComment);
-      //добавить хидден commentLoader
       commentLoader.classList.add('hidden');
+
       return;
     }
   }
+
   commentInc = commentInc + 5;
 }
 
 function eventHandler(evt) {
   if (evt.button === MOUSE_LEFT_BUTTON || evt.keyCode === ESC_BUTTON) {
     commentLoader.classList.remove('hidden');
+    evt.preventDefault();
     document.querySelectorAll('.picture').forEach((item) => {
       item.removeEventListener('click', eventHandler);
     });
@@ -96,19 +102,15 @@ document.querySelectorAll('.picture').forEach((item) => {
 
 //добавляем и удаляем у <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле
 //оставить только if , убрать функцию и ее вызов
-const bodyClassAdd = () => {
-  if (!bigPicture.classList.contains('hidden')) {
-    document.body.classList.add('modal-open');
-  }
-};
-bodyClassAdd();
-const bodyClassRemove = () => {
-  if (bigPicture.classList.contains('hidden')) {
-    document.body.classList.remove('modal-open');
-  }
 
-};
-bodyClassRemove();
+if (!bigPicture.classList.contains('hidden')) {
+  document.body.classList.add('modal-open');
+}
+
+if (bigPicture.classList.contains('hidden')) {
+  document.body.classList.remove('modal-open');
+}
+
 
 //закрытие окна bigPicture по нажатию клавиши Esc и клике по иконке закрытия
 

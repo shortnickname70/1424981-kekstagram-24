@@ -5,3 +5,4 @@ import'./create-small-picrure.js';
 import'./create-big-picrure.js';
 import './form.js';
 import './form-upload.js';
+import './zoom.js';

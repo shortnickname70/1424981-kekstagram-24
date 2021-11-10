@@ -48,9 +48,6 @@ function renderBigPicture(clickedPicture) {
     commentCounter.textContent = `${clickedPicture.comments.length +2 }из${ clickedPicture.comments.length +2 }комментари`;
     commentLoader.classList.add('hidden');
   }
-  // if (clickedPicture.comments.length + 2 % 5) {
-  //   commentLoader.classList.add('hidden');
-  // }
 }
 
 

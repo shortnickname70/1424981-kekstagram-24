@@ -1,8 +1,5 @@
 import {
-  chooseNumber
-} from './data.js';
-
-import {
+  chooseNumber,
   getRandomArrayElement
 } from './data.js';
 
@@ -58,6 +55,20 @@ const USER_NAME = [
   'Люпита',
   'Вашингтон',
 ];
+
+let CardsArray = [];
+
+// const loadPictures = createLoader();
+// loadPictures().then((data) => {
+//   CardsArray = data;
+// })
+// .catch((err) => {
+//   console.log(err);
+//   alert( "Не удалось загрузить данные" );
+//  });
+
+
+
 const createComment = () => ({
   commentId: chooseNumber(1, 10000),
   avatar: `img/avatar-${chooseNumber(1, 6)}.svg`,
@@ -94,11 +105,11 @@ const createCard = (index) => {
 //   commentArray.push(createCard(index));
 // }
 
-const CardsArray = [];
-for (let index = 0; index < 25; index++) {
-  CardsArray.push(createCard(index));
-}
-card = createCard(chooseNumber(1, 24));
+
+// for (let index = 0; index < 25; index++) {
+//   CardsArray.push(createCard(index));
+// }
+// card = createCard(chooseNumber(1, 24));
 
 export {
   createCard

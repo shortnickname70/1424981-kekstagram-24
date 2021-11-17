@@ -1,4 +1,3 @@
-
 import {
   createLoader
 } from './server.js';
@@ -8,7 +7,7 @@ import {
   MOUSE_LEFT_BUTTON
 } from './data.js';
 
-const commentCountStart = 5;
+const COMMENT_COUNT_START = 5;
 const bigPicture = document.querySelector('.big-picture');
 const commentList = document.querySelector('.social__comments'); //куда вставляем новый коммент
 const commentCounter = document.querySelectorAll('.social__comment-count');
@@ -23,10 +22,14 @@ loadPictures().then((data) => {
   cardsArray = data;
   createSmallPictures(data);
 })
-.catch((err) => {
-  console.log(err);
-  alert( "Не удалось загрузить данные" );
- });
+  // .catch((err) => {
+  //   err = 'Не удалось загрузить данные';
+  //   alert(err);
+  // });
+  .catch((err) => {
+    console.log(err);
+    alert('Не удалось загрузить данные');
+  });
 
 const pictureTemplate = document.querySelector('#picture').content
   .querySelector('.picture');
@@ -35,7 +38,11 @@ const userPicturesList = document.querySelector('.pictures');
 const similarUserFragment = document.createDocumentFragment();
 
 function createSmallPictures(picturesArray) {
-  picturesArray.forEach(({url, likes, comments}) => {
+  picturesArray.forEach(({
+    url,
+    likes,
+    comments,
+  }) => {
 
     const pictureBlock = pictureTemplate.cloneNode(true);
     pictureBlock.querySelector('.picture__img').setAttribute('src', url);
@@ -88,12 +95,11 @@ function renderBigPicture(clickedPicture) {
 
 
 // вставляем по 5 комментов
-let commentInc = 9;
+let COMMENT_INC = 9;
 
-/** */
 function renderComment() {
   const commentsArray = document.querySelectorAll('.social__comment');
-  for (let i = commentCountStart; i <= commentInc; i++) {
+  for (let i = COMMENT_COUNT_START; i <= COMMENT_INC; i++) {
     if (commentsArray[i]) {
       commentsArray[i].classList.remove('hidden');
     } else {
@@ -104,7 +110,7 @@ function renderComment() {
     }
   }
 
-  commentInc = commentInc + 5;
+  COMMENT_INC = COMMENT_INC + 5;
 }
 
 /** */
@@ -122,7 +128,7 @@ function eventHandler(evt) {
 
     const commentItems = document.querySelectorAll('.social__comment');
     if (commentItems.length >= 5) {
-      for (let i = commentCountStart; i <= commentItems.length - 1; i++) {
+      for (let i = COMMENT_COUNT_START; i <= commentItems.length - 1; i++) {
         commentItems[i].classList.add('hidden');
       }
     }
@@ -132,7 +138,6 @@ function eventHandler(evt) {
 }
 
 //добавляем и удаляем у <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле
-//оставить только if , убрать функцию и ее вызов
 
 if (!bigPicture.classList.contains('hidden')) {
   document.body.classList.add('modal-open');
@@ -146,17 +151,15 @@ if (bigPicture.classList.contains('hidden')) {
 //закрытие окна bigPicture по нажатию клавиши Esc и клике по иконке закрытия
 
 const bigPictureCloseButton = document.querySelector('.big-picture__cancel');
-
-/** */
 bigPictureCloseButton.addEventListener('click', () => {
   document.querySelectorAll('.picture').forEach((item) => {
     item.addEventListener('click', eventHandler);
   });
-  commentInc = 9;
+  COMMENT_INC = 9;
   const commentsArray1 = document.querySelectorAll('.social__comment');
   /** поместить в отдельную функцию, убрать повторения поиска комментов commentsArray1 */
   commentsArray1.forEach((el) => {
-    /** Array.from(это содает новый массив, так как el.classlist возможно коллекция */
+
     if (Array.from(el.classList).filter((item) => item === 'social__comment--cloned').length > 0) {
       commentList.removeChild(el);
     }
@@ -170,7 +173,7 @@ document.addEventListener('keydown', (evt) => {
     document.querySelectorAll('.picture').forEach((item) => {
       item.addEventListener('click', eventHandler);
     });
-    commentInc = 9;
+    COMMENT_INC = 9;
     const commentsArray1 = document.querySelectorAll('.social__comment');
     commentsArray1.forEach((el) => {
       if (Array.from(el.classList).filter((item) => item === 'social__comment--cloned').length > 0) {

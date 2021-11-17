@@ -1,5 +1,5 @@
 (() => {
-  const EffectParameter = {
+  const EFFECT_PARAMETER = {
     chrome: {
       CLASS: 'effects__preview--chrome',
       NAME: 'grayscale',
@@ -85,7 +85,7 @@
   });
 
 
-  const getFilterValue = (effect, value) => value + EffectParameter[effect].SCALE_DEG;
+  const getFilterValue = (effect, value) => value + EFFECT_PARAMETER[effect].SCALE_DEG;
 
   sliderElement.classList.add('visually-hidden');
 
@@ -101,11 +101,11 @@
         imgPreviewElement.className = `effects__preview--${currentEffectName}`;
         sliderElement.noUiSlider.updateOptions({
           range: {
-            min: EffectParameter[currentEffectName].MIN,
-            max: EffectParameter[currentEffectName].MAX,
+            min: EFFECT_PARAMETER[currentEffectName].MIN,
+            max: EFFECT_PARAMETER[currentEffectName].MAX,
           },
-          start: EffectParameter[currentEffectName].MAX,
-          step: EffectParameter[currentEffectName].STEP,
+          start: EFFECT_PARAMETER[currentEffectName].MAX,
+          step: EFFECT_PARAMETER[currentEffectName].STEP,
         });
       }
     });
@@ -115,9 +115,9 @@
 
     if (currentEffectName === defaultEffect) {
       return;
-    } else if (EffectParameter[currentEffectName] && currentEffectName !== defaultEffect) {
+    } else if (EFFECT_PARAMETER[currentEffectName] && currentEffectName !== defaultEffect) {
 
-      imgPreviewElement.style.filter = `${EffectParameter[currentEffectName].NAME}(${getFilterValue(currentEffectName,
+      imgPreviewElement.style.filter = `${EFFECT_PARAMETER[currentEffectName].NAME}(${getFilterValue(currentEffectName,
         values[handle])})`;
     }
 

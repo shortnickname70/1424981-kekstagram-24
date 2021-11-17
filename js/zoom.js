@@ -1,6 +1,6 @@
 (() => {
 
-  const ScaleValue = {
+  const SCALE_VALUE = {
     MIN: 25,
     STEP: 25,
     MAX: 100,
@@ -13,10 +13,10 @@
   const scaleBiggerElement = document.querySelector('.scale__control--bigger'); // кнопка Увеличить
 
   const changePhotoScale = (value) => {
-    ScaleValue.value = ScaleValue.DEFAULT;
+    SCALE_VALUE.value = SCALE_VALUE.DEFAULT;
     let currentScale = parseInt(scaleValueElement.value, 10);
-    currentScale += ScaleValue.STEP * value;
-    if (currentScale >= ScaleValue.MIN && currentScale <= ScaleValue.MAX || ScaleValue.DEFAULT) {
+    currentScale += SCALE_VALUE.STEP * value;
+    if (currentScale >= SCALE_VALUE.MIN && currentScale <= SCALE_VALUE.MAX || SCALE_VALUE.DEFAULT) {
       scaleValueElement.value = `${currentScale}%`;
       currentScale = currentScale / 100;
       imgPreview.style.transform = `scale(${currentScale})`;

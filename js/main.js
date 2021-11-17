@@ -1,11 +1,9 @@
 import'./data.js';
 import './server.js';
-import './utils/get-random-positive-integer.js';
-import './create-card.js';
-import'./create-small-picrure.js';
-import './form.js';
+import'./render-picrure.js';
+import './validation.js';
 import './form-upload.js';
-import './open-picrure.js';
+import './open-picture.js';
 import './zoom.js';
 import './effects.js';
 

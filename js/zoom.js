@@ -7,7 +7,7 @@
     DEFAULT: 100,
   };
 
-  const imgPreview = document.querySelector('.img-upload__preview');
+  const imgPreview = document.querySelector('.img-upload__preview img');
   const scaleValueElement = document.querySelector('.scale__control--value'); //слайдер-полоска
   const scaleSmallerElement = document.querySelector('.scale__control--smaller'); //кнопка Уменьшить
   const scaleBiggerElement = document.querySelector('.scale__control--bigger'); // кнопка Увеличить
@@ -22,16 +22,13 @@
       imgPreview.style.transform = `scale(${currentScale})`;
     }
     // if (currentScale >= ScaleValue.MAX || ScaleValue.DEFAULT) {
-    //   imgPreview.style.transform = 'scale(1)';
+    // imgPreview.style.transform = 'scale(1)';
     // }
 
     return currentScale;
   };
 
-  scaleBiggerElement.addEventListener('click', () => {
-    changePhotoScale(1);
-  });
-
+  scaleBiggerElement.addEventListener('click', () => changePhotoScale(1));
 
   scaleSmallerElement.addEventListener('click', () => changePhotoScale(-1));
 

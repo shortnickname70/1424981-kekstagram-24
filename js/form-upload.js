@@ -105,7 +105,7 @@ const setUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     fetch(
-      'https://24.javascript.pages.academy/kekstagram1', {
+      'https://24.javascript.pages.academy/kekstagram', {
         redirect: 'error',
         method: 'POST',
         type: 'multipart/form-data',

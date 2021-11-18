@@ -66,24 +66,25 @@
   });
 
   // отображает блок с фильтрами
-//   const showFilters = function () {
-//     filterDiscussed.addEventListener('click', () => {
-//       setActiveClass(filterDiscussed);
-//       onDiscussedClick();
-//     });
-//     filterRandom.addEventListener('click', () => {
-//       setActiveClass(filterRandom);
-//       onRandomClick();
-//     });
-//     filterDefault.addEventListener('click', () => {
-//       setActiveClass(filterDefault);
-//       onDefaultClick();
-//     });
 
-//     filters.classList.remove('img-filters--inactive');
-//   };
+  const showFilters = function () {
+    filterDiscussed.addEventListener('click', () => {
+      setActiveClass(filterDiscussed);
+      onDiscussedClick();
+    });
+    filterRandom.addEventListener('click', () => {
+      setActiveClass(filterRandom);
+      onRandomClick();
+    });
+    filterDefault.addEventListener('click', () => {
+      setActiveClass(filterDefault);
+      onDefaultClick();
+    });
 
-//   window.filter = {
-//     show: showFilters,
-//   };
-// })();
+    filters.classList.remove('img-filters--inactive');
+  };
+
+  window.filter = {
+    show: showFilters,
+  };
+})();

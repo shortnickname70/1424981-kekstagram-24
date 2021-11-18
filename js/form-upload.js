@@ -85,7 +85,6 @@ function errorClosePopupHandler(evt) {
     document.querySelector('.error').removeEventListener('click', errorClosePopupHandler);
     document.querySelector('.error').remove();
   }
-
 }
 
 function errorUploadHanler() {
@@ -105,7 +104,7 @@ const setUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
     fetch(
-      'https://24.javascript.pages.academy/kekstagram1', {
+      'https://24.javascript.pages.academy/kekstagram', {
         redirect: 'error',
         method: 'POST',
         type: 'multipart/form-data',

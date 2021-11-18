@@ -6,4 +6,5 @@ import './form-upload.js';
 import './open-picture.js';
 import './zoom.js';
 import './effects.js';
-
+import './filters.js';
+import './debounce.js';

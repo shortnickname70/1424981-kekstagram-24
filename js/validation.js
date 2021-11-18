@@ -1,10 +1,3 @@
-//https://coderoad.ru/46155/%D0%9A%D0%B0%D0%BA-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D1%82%D1%8C-%D0%B0%D0%B4%D1%80%D0%B5%D1%81-email-%D0%B2-JavaScript
-// валидация хэштегов
-// const testHashtag = RegExp('/^#[A-Za-zА-Яа-яЁё0-9]{2,19}$/', 'g');
-import {
-  uploadPopup
-} from './form-upload.js';
-
 const addHashtag = document.querySelector('.text__hashtags');
 
 (() => {
@@ -29,7 +22,7 @@ const addHashtag = document.querySelector('.text__hashtags');
   };
 
 
-  // const testRegex = (hashtags) =>  testHashtag.test(hashtags);
+  // валидация хэштегов
 
   const hashtagValidity = () => {
     addHashtag.style.outline = '';
@@ -61,9 +54,6 @@ const addHashtag = document.querySelector('.text__hashtags');
         errorMessage = 'Введите корректные символы';
         return false;
       }
-      // else if (testRegex(hashtags)) {
-      //   errorMessage = 'Введите корректные символы';
-      // }
     });
 
     addHashtag.setCustomValidity(errorMessage);
@@ -74,7 +64,7 @@ const addHashtag = document.querySelector('.text__hashtags');
 })();
 
 
-// //валидация комментов
+//валидация комментов
 
 (() => {
 
@@ -107,4 +97,3 @@ const addHashtag = document.querySelector('.text__hashtags');
   addComment.addEventListener('input', commentValidity);
 
 })();
-

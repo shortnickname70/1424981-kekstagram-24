@@ -1,5 +1,3 @@
-
-
 (function () {
   const RANDOM_PICTURES_MAX_RANGE = 20;
   const RANDOM_PICTURES_AMOUNT = 10;
@@ -10,12 +8,12 @@
   const filterDiscussed = filters.querySelector('#filter-discussed');
   const picturesContainer = document.querySelector('.pictures');
 
-  const removeElements = window.util.removeElements;
-  const addID = window.util.addID;
-  const addtListenersPicture = window.preview.addtListenersPicture;
-  const getFragment = window.picture.getFragment;
-  const getArrayOfUniqueNumbers = window.util.getArrayOfUniqueNumbers;
-  const set = window.debounce.set;
+  const removeElements = document.util.removeElements;
+  const addID = document.util.addID;
+  const addtListenersPicture = document.preview.addtListenersPicture;
+  const getFragment = document.picture.getFragment;
+  const getArrayOfUniqueNumbers = document.util.getArrayOfUniqueNumbers;
+  const set = document.debounce.set;
 
   // переключает класс активной кнопки
 
@@ -44,7 +42,7 @@
   const onRandomClick = set(() => {
     const uniqueArray = getArrayOfUniqueNumbers(RANDOM_PICTURES_MAX_RANGE, RANDOM_PICTURES_AMOUNT);
 
-    const randomPictures = uniqueArray.map((number) => window.gallery.data[number]);
+    const randomPictures = uniqueArray.map((number) => document.images.data[number]);
 
     rerenderPictures(randomPictures);
   });
@@ -52,7 +50,7 @@
   // сортирует обсуждаемые фото - т.е. по кол-ву комментариев
 
   const onDiscussedClick = set(() => {
-    const copyData = window.gallery.data.slice();
+    const copyData = document.images.data.slice();
 
     copyData.sort((a, b) => b.comments.length - a.comments.length);
 
@@ -62,7 +60,7 @@
   // отображает фото в исходном порядке
 
   const onDefaultClick = set(() => {
-    rerenderPictures(window.gallery.data);
+    rerenderPictures(document.images.data);
   });
 
   // отображает блок с фильтрами
@@ -84,7 +82,10 @@
     filters.classList.remove('img-filters--inactive');
   };
 
-  window.filter = {
+  document.filter = {
     show: showFilters,
   };
 })();
+
+// ***document.images = window.gallery , document. = window.
+

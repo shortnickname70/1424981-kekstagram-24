@@ -85,7 +85,6 @@ function errorClosePopupHandler(evt) {
     document.querySelector('.error').removeEventListener('click', errorClosePopupHandler);
     document.querySelector('.error').remove();
   }
-
 }
 
 function errorUploadHanler() {

@@ -1,91 +1,56 @@
-(function () {
-  const RANDOM_PICTURES_MAX_RANGE = 20;
-  const RANDOM_PICTURES_AMOUNT = 10;
+import {
+  createSmallPictures
+} from './render-picrure.js';
+import {
+  chooseNumberCount
+} from './data.js';
 
-  const filters = document.querySelector('.img-filters');
-  const filterDefault = filters.querySelector('#filter-default');
-  const filterRandom = filters.querySelector('#filter-random');
-  const filterDiscussed = filters.querySelector('#filter-discussed');
-  const picturesContainer = document.querySelector('.pictures');
 
-  const removeElements = document.util.removeElements;
-  const addID = document.util.addID;
-  const addtListenersPicture = document.preview.addtListenersPicture;
-  const getFragment = document.picture.getFragment;
-  const getArrayOfUniqueNumbers = document.util.getArrayOfUniqueNumbers;
-  const set = document.debounce.set;
+const RANDOM_PICTURES_MAX_RANGE = 24;
+const RANDOM_PICTURES_AMOUNT = 10;
 
-  // переключает класс активной кнопки
+const filters = document.querySelector('.img-filters');
+const filtersButtons = filters.querySelectorAll('.img-filters__button');
 
-  const setActiveClass = function (element) {
-    const activeButton = filters.querySelector('.img-filters__button--active');
+let pictures = [];
 
-    if (activeButton) {
-      activeButton.classList.remove('img-filters__button--active');
+
+function beginFilteringProcess(pictureArray) {
+  pictures = pictureArray;
+  filters.classList.remove('img-filters--inactive');
+  filtersButtons.forEach((button) => {
+    button.addEventListener('click', filterHandler);
+  });
+}
+
+function filterHandler(evt) {
+  filtersButtons.forEach((button) => {
+    evt.target.id === button.id ? button.classList.add('img-filters__button--active') : button.classList.remove('img-filters__button--active');
+    if (evt.target.id === 'filter-default') {
+      deletePictures();
+      createSmallPictures(pictures);
+    } else if (evt.target.id === 'filter-random') {
+      const randomIndexesarray = chooseNumberCount(0, RANDOM_PICTURES_MAX_RANGE, RANDOM_PICTURES_AMOUNT);
+      const randomPicturesArray = pictures.filter((item, index) => randomIndexesarray.includes(index));
+      deletePictures();
+      createSmallPictures(randomPicturesArray);
+    } else {
+      deletePictures();
+      createSmallPictures(getPopularPictures(Array.from(new Set(pictures))));
     }
-
-    element.classList.add('img-filters__button--active');
-  };
-
-  // отрисовывает фотографии по новой
-
-  const rerenderPictures = function (pictures) {
-
-    removeElements(picturesContainer);
-    addID(pictures);
-    picturesContainer.appendChild(getFragment(pictures));
-    addtListenersPicture(pictures);
-  };
-
-  // фильтрует и отображает 10 случайных неповторяющихся фото
-
-  const onRandomClick = set(() => {
-    const uniqueArray = getArrayOfUniqueNumbers(RANDOM_PICTURES_MAX_RANGE, RANDOM_PICTURES_AMOUNT);
-
-    const randomPictures = uniqueArray.map((number) => document.images.data[number]);
-
-    rerenderPictures(randomPictures);
   });
+}
 
-  // сортирует обсуждаемые фото - т.е. по кол-ву комментариев
+function getPopularPictures(picturesArray) {
+  return picturesArray.sort((a, b) => b.comments.length - a.comments.length);
+}
 
-  const onDiscussedClick = set(() => {
-    const copyData = document.images.data.slice();
-
-    copyData.sort((a, b) => b.comments.length - a.comments.length);
-
-    rerenderPictures(copyData);
+function deletePictures() {
+  document.querySelectorAll('.picture').forEach((item) => {
+    item.remove();
   });
+}
 
-  // отображает фото в исходном порядке
-
-  const onDefaultClick = set(() => {
-    rerenderPictures(document.images.data);
-  });
-
-  // отображает блок с фильтрами
-
-  const showFilters = function () {
-    filterDiscussed.addEventListener('click', () => {
-      setActiveClass(filterDiscussed);
-      onDiscussedClick();
-    });
-    filterRandom.addEventListener('click', () => {
-      setActiveClass(filterRandom);
-      onRandomClick();
-    });
-    filterDefault.addEventListener('click', () => {
-      setActiveClass(filterDefault);
-      onDefaultClick();
-    });
-
-    filters.classList.remove('img-filters--inactive');
-  };
-
-  document.filter = {
-    show: showFilters,
-  };
-})();
-
-// ***document.images = window.gallery , document. = window.
-
+export {
+  beginFilteringProcess
+};

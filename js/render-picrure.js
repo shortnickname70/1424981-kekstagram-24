@@ -7,10 +7,14 @@ import {
   MOUSE_LEFT_BUTTON
 } from './data.js';
 
+import {
+  beginFilteringProcess
+} from './filters.js';
+
 const COMMENT_COUNT_START = 5;
 const bigPicture = document.querySelector('.big-picture');
 const commentList = document.querySelector('.social__comments'); //куда вставляем новый коммент
-const commentCounter = document.querySelectorAll('.social__comment-count');
+const commentCounter = document.querySelector('.social__comment-count');
 const commentLoader = document.querySelector('.comments-loader');
 
 
@@ -21,11 +25,8 @@ const loadPictures = createLoader();
 loadPictures().then((data) => {
   cardsArray = data;
   createSmallPictures(data);
+  beginFilteringProcess(data);
 })
-  // .catch((err) => {
-  //   err = 'Не удалось загрузить данные';
-  //   alert(err);
-  // });
   .catch((err) => {
     console.log(err);
     alert('Не удалось загрузить данные');
@@ -87,9 +88,18 @@ function renderBigPicture(clickedPicture) {
   bigPicture.querySelector('.comments-count').textContent = clickedPicture.comments.length + 2;
   appendComments(clickedPicture.comments);
   bigPicture.querySelector('.social__caption').textContent = clickedPicture.description;
+  glueString(clickedPicture);
+}
+
+function glueString(clickedPicture) {
+  const rowText = commentCounter.textContent.split(' ');
   if (clickedPicture.comments.length + 2 <= 5) {
-    commentCounter.textContent = `${clickedPicture.comments.length +2 }из${ clickedPicture.comments.length +2 }комментариев`;
+    rowText[0] = rowText[2] = clickedPicture.comments.length + 2;
+    commentCounter.innerHTML = `${rowText[0]} ${rowText[1]} <span class="comments-count">${rowText[2]}</span> ${rowText[3]}`;
     commentLoader.classList.add('hidden');
+  } else {
+    rowText[0] = '5';
+    commentCounter.innerHTML = `${rowText[0]} ${rowText[1]} <span class="comments-count">${rowText[2]}</span> ${rowText[3]}`;
   }
 }
 
@@ -183,3 +193,7 @@ document.addEventListener('keydown', (evt) => {
     bigPicture.classList.add('hidden');
   }
 });
+
+export {
+  createSmallPictures
+};

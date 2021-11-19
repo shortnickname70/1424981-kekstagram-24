@@ -14,12 +14,29 @@ verifyStrokeLength('some text', 10);
 
 const isEscEvent = (evt) => evt.key === 'Escape';
 
-// // рандомайзер числа
+// рандомайзер числа
 
 // function chooseNumber(from, to) {
 //   const number = from + Math.random() * (to + 1 - from);
 //   return Math.floor(number);
 // }
+
+// рандомайзер энного количества неповторяющихся цифр
+
+function chooseNumberCount(from, to, count) {
+  let array = [];
+  // for (let j = 0; j < count; j++) {
+  //  const number = Math.ceil(from + Math.random() * (to + 1 - from));
+  //  array.push(number);
+  // }
+  while (Array.from(new Set(array)).length < count) {
+    const number = Math.ceil(from + Math.random() * (to + 1 - from));
+    array = Array.from(new Set(array));
+    array.push(number);
+  }
+  return array;
+}
+
 
 // //рандомайзер элемента
 
@@ -35,9 +52,9 @@ export {
 // export {
 //   getRandomArrayElement
 // };
-// export {
-//   chooseNumber
-// };
+export {
+  chooseNumberCount
+};
 export {
   ESC_BUTTON
 };

@@ -1,3 +1,4 @@
+'use strict';
 import {
   createSmallPictures
 } from './render-picrure.js';
@@ -13,7 +14,6 @@ const filters = document.querySelector('.img-filters');
 const filtersButtons = filters.querySelectorAll('.img-filters__button');
 
 let pictures = [];
-
 
 function beginFilteringProcess(pictureArray) {
   pictures = pictureArray;

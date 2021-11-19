@@ -1,3 +1,4 @@
+'use strict';
 (() => {
 
   const SCALE_VALUE = {
@@ -21,10 +22,6 @@
       currentScale = currentScale / 100;
       imgPreview.style.transform = `scale(${currentScale})`;
     }
-    // if (currentScale >= ScaleValue.MAX || ScaleValue.DEFAULT) {
-    // imgPreview.style.transform = 'scale(1)';
-    // }
-
     return currentScale;
   };
 

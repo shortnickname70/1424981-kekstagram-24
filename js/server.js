@@ -1,3 +1,4 @@
+'use strict';
 /* eslint-disable no-unused-vars */
 const createLoader = (onSuccess, onError) => () => fetch(
   'https://24.javascript.pages.academy/kekstagram/data', {

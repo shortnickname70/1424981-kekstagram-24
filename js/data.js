@@ -1,3 +1,4 @@
+'use strict';
 // имя_функции(проверяемая_строка, максимальная_длина);
 // Результат: true, если строка проходит по длине, и false — если не проходит
 function verifyStrokeLength(stroke, maxLength) {
@@ -14,21 +15,10 @@ verifyStrokeLength('some text', 10);
 
 const isEscEvent = (evt) => evt.key === 'Escape';
 
-// рандомайзер числа
-
-// function chooseNumber(from, to) {
-//   const number = from + Math.random() * (to + 1 - from);
-//   return Math.floor(number);
-// }
-
 // рандомайзер энного количества неповторяющихся цифр
 
 function chooseNumberCount(from, to, count) {
   let array = [];
-  // for (let j = 0; j < count; j++) {
-  //  const number = Math.ceil(from + Math.random() * (to + 1 - from));
-  //  array.push(number);
-  // }
   while (Array.from(new Set(array)).length < count) {
     const number = Math.ceil(from + Math.random() * (to + 1 - from));
     array = Array.from(new Set(array));
@@ -37,11 +27,6 @@ function chooseNumberCount(from, to, count) {
   return array;
 }
 
-
-// //рандомайзер элемента
-
-// const getRandomArrayElement = (elements) => elements[chooseNumber(0, elements.length - 1)];
-
 //клавиши и левая кнопка мыши
 const ESC_BUTTON = 27;
 const MOUSE_LEFT_BUTTON = 0;
@@ -49,9 +34,7 @@ const MOUSE_LEFT_BUTTON = 0;
 export {
   isEscEvent
 };
-// export {
-//   getRandomArrayElement
-// };
+
 export {
   chooseNumberCount
 };

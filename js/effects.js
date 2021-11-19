@@ -1,3 +1,4 @@
+'use strict';
 (() => {
   const EFFECT_PARAMETER = {
     chrome: {
@@ -57,10 +58,6 @@
   let currentEffectName = effectsListElement.querySelector('.effects__radio:checked'); // выбранный эффект по радио-кнопке
   const effectsListInput = document.querySelectorAll('.effects__radio'); // эффекты-картинки-они-же-инпуты
 
-  const EffectValue = {
-    MAX: 100,
-    DEFAULT: 100,
-  };
 
   //слайдер
   noUiSlider.create(sliderElement, {
@@ -113,9 +110,7 @@
   sliderElement.noUiSlider.on('update', (values, handle) => {
     valueElement.value = values[handle];
 
-    if (currentEffectName === defaultEffect) {
-      return;
-    } else if (EFFECT_PARAMETER[currentEffectName] && currentEffectName !== defaultEffect) {
+    if (EFFECT_PARAMETER[currentEffectName] && currentEffectName !== defaultEffect) {
 
       imgPreviewElement.style.filter = `${EFFECT_PARAMETER[currentEffectName].NAME}(${getFilterValue(currentEffectName,
         values[handle])})`;

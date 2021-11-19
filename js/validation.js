@@ -1,11 +1,12 @@
+'use strict';
 const addHashtag = document.querySelector('.text__hashtags');
 
 (() => {
 
   const HASHTAG = {
-    maxHashtags: 5,
-    hashtagSymbol: '#',
-    maxLength: 20,
+    MAX_HASHTAGS: 5,
+    HASHTAG_SYMBOL: '#',
+    MAX_LENGTH: 20,
   };
 
 
@@ -21,7 +22,6 @@ const addHashtag = document.querySelector('.text__hashtags');
     return false;
   };
 
-
   // валидация хэштегов
 
   const hashtagValidity = () => {
@@ -35,15 +35,15 @@ const addHashtag = document.querySelector('.text__hashtags');
     }
     const hashtags = hashtagValue.toLowerCase().split(' ');
     hashtags.forEach((hashtagItem) => {
-      if (hashtagItem.charAt(0) !== HASHTAG.hashtagSymbol) {
+      if (hashtagItem.charAt(0) !== HASHTAG.HASHTAG_SYMBOL) {
         errorMessage = 'Начинайте хэштег с символа #';
-      } else if (hashtagItem.indexOf(HASHTAG.hashtagSymbol, 1) > 1) {
+      } else if (hashtagItem.indexOf(HASHTAG.HASHTAG_SYMBOL, 1) > 1) {
         errorMessage = 'Между хэштегами должен быть пробел';
-      } else if (hashtagItem.charAt(0) === HASHTAG.hashtagSymbol && hashtagItem.length === 1) {
+      } else if (hashtagItem.charAt(0) === HASHTAG.HASHTAG_SYMBOL && hashtagItem.length === 1) {
         errorMessage = 'Хештег не должен состоять только из одной решётки';
-      } else if (hashtags.length > HASHTAG.maxHashtags) {
+      } else if (hashtags.length > HASHTAG.MAX_HASHTAGS) {
         errorMessage = 'Максимальное количество  хэштегов не более 5';
-      } else if (hashtagItem.length > HASHTAG.maxLength) {
+      } else if (hashtagItem.length > HASHTAG.MAX_LENGTH) {
         errorMessage = 'Максимальная длина одного хэштега 20 символов, включая решётку';
       } else if (checkRepeatHashtags(hashtags)) {
         errorMessage = 'Хэштеги не должны повторяться';
@@ -62,7 +62,6 @@ const addHashtag = document.querySelector('.text__hashtags');
   addHashtag.addEventListener('input', hashtagValidity);
 
 })();
-
 
 //валидация комментов
 

@@ -1,3 +1,4 @@
+'use strict';
 import {
   createLoader
 } from './server.js';
@@ -27,8 +28,7 @@ loadPictures().then((data) => {
   createSmallPictures(data);
   beginFilteringProcess(data);
 })
-  .catch((err) => {
-    console.log(err);
+  .catch(() => {
     alert('Не удалось загрузить данные');
   });
 
@@ -167,7 +167,6 @@ bigPictureCloseButton.addEventListener('click', () => {
   });
   COMMENT_INC = 9;
   const commentsArray1 = document.querySelectorAll('.social__comment');
-  /** поместить в отдельную функцию, убрать повторения поиска комментов commentsArray1 */
   commentsArray1.forEach((el) => {
 
     if (Array.from(el.classList).filter((item) => item === 'social__comment--cloned').length > 0) {
